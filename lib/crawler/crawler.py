@@ -93,21 +93,38 @@ def crawl_eksi(args):
     # Add Email
     log_message = f'Getting all the titles'
     log(log_message)
-    titles = driver.find_elements(By.XPATH, '//*[@id="partial-index"]/ul')
-    time.sleep(5)
 
     data_dict_list = []
-    entry_list = titles[0].text.split('\n')
+    for i in range(5):
+        time.sleep(3)
 
-    # Get all the entries by their title and #
-    for i in range(0, len(entry_list), 2):
-        print(entry_list[i], entry_list[i + 1])
-        data_dict = {
-            'title': entry_list[i],
-            'entries': entry_list[i + 1]
-        }
-        data_dict_list.append(data_dict)
-    time.sleep(2)
+        if i == 1:
+            driver.find_element(By.XPATH, '//*[@id="onetrust-close-btn-container"]/button').click()
+            time.sleep(3)
+            driver.find_element(By.XPATH, '//*[@id="quick-index-continue-link"]').click()
+
+        elif i > 1:
+            driver.find_element(By.XPATH, '//*[@id="partial-index"]/div[3]/a[3]').click()
+
+        time.sleep(3)
+
+        titles = driver.find_elements(By.XPATH, '//*[@id="partial-index"]/ul')
+        time.sleep(5)
+
+        entry_list = titles[0].text.split('\n')
+
+        # Get all the entries by their title and #
+        for i in range(0, len(entry_list), 2):
+            print(entry_list[i], entry_list[i + 1])
+
+            data_dict = {
+                'title': entry_list[i],
+                'entries': entry_list[i + 1]
+            }
+            data_dict_list.append(data_dict)
+
+        time.sleep(2)
+
     driver.quit()
 
     return pd.DataFrame(data_dict_list)
