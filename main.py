@@ -5,6 +5,7 @@ import sys
 from dotenv import load_dotenv
 import argparse
 from lib.crawler.crawler import crawl_eksi
+import datetime
 
 
 
@@ -17,5 +18,6 @@ if __name__ == '__main__':
     load_dotenv()
 
     entries = crawl_eksi(args)
+    entries['created_on'] = pd.to_datetime('now', utc=True)
     print(entries.head(5))
 
