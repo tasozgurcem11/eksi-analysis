@@ -79,7 +79,7 @@ def crawl_eksi(args):
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     else:
-        driver = webdriver.Chrome(executable_path=f'chromedriver.exe',  options=options)
+        driver = webdriver.Chrome(executable_path=f'./chromedriver.exe',  options=options)
 
     driver.implicitly_wait(10)
 
