@@ -20,18 +20,15 @@ class PGSQLConnection:
 
     """
 
-    def __init__(self, conn_type='bitdotio', api_key='', conn_url='', sqlite_path=None, config=''):
+    def __init__(self, conn_type='postgresql', api_key='', conn_url='', sqlite_path=None, config=''):
         self.conn_url = conn_url
         self.config = config
         self.api_key = api_key
         self.conn_type = conn_type
         self.sqlite_path = sqlite_path
 
-        if conn_type == 'bitdotio':
-            client = bitdotio.bitdotio(api_key)
-            self.engine = client.get_connection()
 
-        elif conn_type == 'postgresql':
+        if conn_type == 'postgresql':
             self.engine = create_engine(
                 conn_url,
                 execution_options={
