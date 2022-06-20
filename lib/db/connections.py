@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-import bitdotio
-from dotenv import load_dotenv
 from sqlalchemy import create_engine
 import sqlite3
 from sqlite3 import Error
