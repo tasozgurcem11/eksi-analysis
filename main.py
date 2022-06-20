@@ -5,6 +5,7 @@ import sys
 from dotenv import load_dotenv
 import argparse
 from lib.crawler.crawler import crawl_eksi
+from lib.db.connections import PGSQLConnection
 import datetime
 
 
@@ -19,10 +20,15 @@ if __name__ == '__main__':
     entries = crawl_eksi(args)
 
     # Pre-process entries:
-    entries['created_on'] = pd.to_datetime('now', utc=True)
-    entries['created_on'] = entries['created_on'].astype(str)
-    entries['created_on'] = entries['created_on'].apply(lambda x: x.split(' ', 2)[0])
-    entries.to_csv('entries.csv')
+    # entries['created_on'] = pd.to_datetime('now', utc=True)
+    # entries['created_on'] = entries['created_on'].astype(str)
+    # entries['created_on'] = entries['created_on'].apply(lambda x: x.split(' ', 2)[0])
     print(entries.head(5))
     print(entries.shape)
+
+    entries.rename(columns={'title': 'entry_title', 'entries': 'entry_record'}, inplace=True)
+
+    psql_conn = PGSQLConnection(conn_url=os.getenv('CONN_URI'))
+
+    psql_conn.upload_table(entries, 'eksi_entries')
 
