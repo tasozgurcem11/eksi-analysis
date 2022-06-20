@@ -18,7 +18,6 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     rm -rf /var/lib/apt/lists/*
 
 
-
 # Install crontab:
 RUN apt-get update && apt-get -y install cron vim
 
