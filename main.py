@@ -20,9 +20,10 @@ if __name__ == '__main__':
     entries = crawl_eksi(args)
 
     # Pre-process entries:
-    # entries['created_on'] = pd.to_datetime('now', utc=True)
-    # entries['created_on'] = entries['created_on'].astype(str)
-    # entries['created_on'] = entries['created_on'].apply(lambda x: x.split(' ', 2)[0])
+    entries['created_on'] = pd.to_datetime('now', utc=True)
+    entries['created_on'] = entries['created_on'].astype(str)
+    entries['created_on'] = entries['created_on'].apply(lambda x: x.split(' ', 2)[0])
+
     print(entries.head(5))
     print(entries.shape)
 
