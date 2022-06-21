@@ -7,10 +7,13 @@
 
 ### Contents
 
-1. [Setup](#setup) 
+1. [Setup](#setup)
 
 
 ### 1. Setup
 
 Chromium download link:
 https://chromedriver.chromium.org/downloads
+
+Running commands:
+
