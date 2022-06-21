@@ -15,5 +15,12 @@
 Chromium download link:
 https://chromedriver.chromium.org/downloads
 
-Running commands:
+Build and run container:
 
+```
+docker build -t eksi .
+```
+
+```
+docker run -it --rm eksi1
+```
