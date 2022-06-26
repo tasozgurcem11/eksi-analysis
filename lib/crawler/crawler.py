@@ -56,7 +56,6 @@ def generate_options(args):
 def generate_prefs(options):
     """
     Generate prefs for Chrome
-    :param paths_dict:
     :param options:
     :return:
     """
