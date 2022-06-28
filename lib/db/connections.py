@@ -112,7 +112,7 @@ class PGSQLConnection:
 
         return table_df
 
-    def upload_table(self, input_df, table_name, batch_size=10000, reset_table=False):
+    def upload_table(self, input_df, table_name, batch_size=10000, reset_table=False, auto_id=False, data_append=True):
         """
         Uploads table to the database
         :param input_df:
@@ -120,34 +120,41 @@ class PGSQLConnection:
         """
         current_df = self.get_table(table_name)
 
-        if reset_table:
-            upload_df = input_df.copy()
+        if data_append:
+            current_df.to_sql(table_name, con=self.engine, index=False, if_exists='append')
 
         else:
-            upload_df = pd.concat([current_df, input_df])
+            if reset_table:
+                upload_df = input_df.copy()
+
+            else:
+                upload_df = pd.concat([current_df, input_df])
+                if auto_id:
+                    upload_df = upload_df.reset_index(drop=True)
+                    upload_df['id'] = upload_df.index
 
 
-        print(f'Uploading table: {table_name}')
-        if upload_df.shape[0] > batch_size:
-            # Merges data to make upload process robust:
-            number_of_batch = int(math.ceil(upload_df.shape[0] / batch_size))
-            batch_list = np.array_split(upload_df, number_of_batch)
-            print(f"Total number of batch: {str(len(batch_list))}")
+            print(f'Uploading table: {table_name}')
+            if upload_df.shape[0] > batch_size:
+                # Merges data to make upload process robust:
+                number_of_batch = int(math.ceil(upload_df.shape[0] / batch_size))
+                batch_list = np.array_split(upload_df, number_of_batch)
+                print(f"Total number of batch: {str(len(batch_list))}")
 
-            i = 0
-            for batch in batch_list:
-                i = i + 1
-                if i == 1:
-                    """
-                    Upload first batch by replacing previous data.
-                    """
-                    batch.to_sql(table_name, con=self.engine, index=False, if_exists='replace')
+                i = 0
+                for batch in batch_list:
+                    i = i + 1
+                    if i == 1:
+                        """
+                        Upload first batch by replacing previous data.
+                        """
+                        batch.to_sql(table_name, con=self.engine, index=False, if_exists='replace')
 
-                else:
-                    batch.to_sql(table_name, con=self.engine, index=False, if_exists='append')
+                    else:
+                        batch.to_sql(table_name, con=self.engine, index=False, if_exists='append')
 
-        else:
-            upload_df.to_sql(table_name, con=self.engine, index=False, if_exists='replace')
+            else:
+                upload_df.to_sql(table_name, con=self.engine, index=False, if_exists='replace')
 
 
     def drop_view(self, view_name):
