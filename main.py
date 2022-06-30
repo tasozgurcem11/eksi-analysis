@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 import argparse
 from lib.crawler.crawler import crawl_eksi
 from lib.db.connections import PGSQLConnection
-import datetime
 
 
 
