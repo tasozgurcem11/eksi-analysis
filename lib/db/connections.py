@@ -121,7 +121,7 @@ class PGSQLConnection:
         current_df = self.get_table(table_name)
 
         if data_append:
-            current_df.to_sql(table_name, con=self.engine, index=False, if_exists='append')
+            input_df.to_sql(table_name, con=self.engine, index=False, if_exists='append')
 
         else:
             if reset_table:
