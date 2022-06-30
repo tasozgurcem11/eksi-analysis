@@ -97,10 +97,15 @@ def crawl_eksi(args):
     for i in range(5):
         time.sleep(3)
 
-        if i == 1:
+        if i == 0:
             driver.find_element(By.XPATH, '//*[@id="onetrust-close-btn-container"]/button').click()
             time.sleep(3)
             driver.find_element(By.XPATH, '//*[@id="quick-index-continue-link"]').click()
+            time.sleep(3)
+            try:
+                driver.find_element(By.XPATH, '//*[@id="interstitial-close-link-tag"]').click()
+            except:
+                pass
 
         elif i > 1:
             driver.find_element(By.XPATH, '//*[@id="partial-index"]/div[3]/a[3]').click()
