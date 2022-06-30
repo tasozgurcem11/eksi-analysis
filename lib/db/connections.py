@@ -157,6 +157,25 @@ class PGSQLConnection:
                 upload_df.to_sql(table_name, con=self.engine, index=False, if_exists='replace')
 
 
+
+    def insert_data(self, input_df, table_name):
+        """
+        Uploads table to the database
+        :param input_df:
+        :param table_name:
+        """
+        current_df = self.get_table(table_name)
+
+
+        # Use INSERT to upload data:
+        for index, row in input_df.iterrows():
+            insert_query = f"INSERT INTO {table_name} VALUES ({row.to_json()})"
+            with self.engine.connect() as conn:
+                conn.execute(insert_query)
+
+
+
+
     def drop_view(self, view_name):
         """
         Drops view from the database
