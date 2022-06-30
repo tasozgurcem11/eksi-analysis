@@ -95,14 +95,14 @@ def crawl_eksi(args):
 
     data_dict_list = []
     for i in range(5):
-        # try:
-        #     iframe = driver.find_element(By.XPATH, "//iframe[@name='Dialogue Window']")
-        #     time.sleep(3)
-        #     driver.switch_to.frame(iframe)
-        #     time.sleep(3)
-        #     driver.find_element(By.XPATH, '//*[@id="interstitial-close-link-tag"]').click()
-        # except:
-        #     pass
+        try:
+            iframe = driver.find_element(By.XPATH, '//*[@id="google_ads_iframe_/138586269/desktop_web_interstitial_0"]')
+            time.sleep(3)
+            driver.switch_to.frame(iframe)
+            time.sleep(3)
+            driver.find_element(By.XPATH, '//*[@id="interstitial-close-link-tag"]').click()
+        except:
+            pass
         time.sleep(3)
 
         if i == 1:
