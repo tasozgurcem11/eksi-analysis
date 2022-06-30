@@ -31,5 +31,5 @@ if __name__ == '__main__':
 
     psql_conn = PGSQLConnection(conn_url=os.getenv('CONN_URI'))
 
-    psql_conn.upload_table(entries, 'eksi_daily', reset_table=False)
+    psql_conn.upload_table(entries, 'eksi_daily', data_append=True)
 
