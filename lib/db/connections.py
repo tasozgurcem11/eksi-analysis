@@ -167,11 +167,11 @@ class PGSQLConnection:
         current_df = self.get_table(table_name)
 
 
-        # Use INSERT to upload data:
-        for index, row in input_df.iterrows():
-            insert_query = f"INSERT INTO {table_name} VALUES ({row.to_json()})"
-            with self.engine.connect() as conn:
-                conn.execute(insert_query)
+        # # Use INSERT to upload data:
+        # for index, row in input_df.iterrows():
+        #     insert_query = f"INSERT INTO {table_name} VALUES ({row.to_json()})"
+        #     with self.engine.connect() as conn:
+        #         conn.execute(insert_query)
 
 
 
