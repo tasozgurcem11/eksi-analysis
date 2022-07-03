@@ -68,7 +68,10 @@ def generate_prefs(options):
     return options
 
 
-def crawl_eksi(args):
+def crawl_eksi(args, number_of_pages_to_crawl=5):
+    # Max pages to crawl should be 5:
+    if number_of_pages_to_crawl > 5:
+        number_of_pages_to_crawl = 5
 
     # Create Selenium Settings and Options
     options = generate_options(args)
@@ -94,7 +97,7 @@ def crawl_eksi(args):
     log(log_message)
 
     data_dict_list = []
-    for i in range(5):
+    for i in range(number_of_pages_to_crawl):
         try:
             iframe = driver.find_element(By.XPATH, '//*[@id="google_ads_iframe_/138586269/desktop_web_interstitial_0"]')
             time.sleep(3)
