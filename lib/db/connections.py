@@ -5,7 +5,8 @@ import sqlite3
 from sqlite3 import Error
 import math
 from sqlalchemy import inspect
-
+import psycopg2.extras
+import psycopg2
 
 class PGSQLConnection:
     """
@@ -164,7 +165,21 @@ class PGSQLConnection:
         :param input_df:
         :param table_name:
         """
-        current_df = self.get_table(table_name)
+
+        df_columns = list(input_df)
+        # create (col1,col2,...)
+        columns = ",".join(df_columns)
+
+        # create VALUES('%s', '%s",...) one '%s' per column
+        values = "VALUES({})".format(",".join(["%s" for _ in df_columns]))
+
+        # create INSERT INTO table (columns) VALUES('%s',...)
+        insert_stmt = "INSERT INTO {} ({}) {}".format(table_name, columns, values)
+
+        cur = self.conn.cursor()
+        psycopg2.extras.execute_batch(cur, insert_stmt, input_df.values)
+        self.conn.commit()
+        cur.close()
 
 
         # # Use INSERT to upload data:
