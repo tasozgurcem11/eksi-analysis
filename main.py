@@ -12,6 +12,7 @@ from lib.db.connections import PGSQLConnection
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Collect data from eksisozluk.com')
     parser.add_argument('--local', action='store_true', help='Local option for paths and driver.')
+    parser.add_argument('--custom_driver', type=str, help='Driver path.')
     args = parser.parse_args()
 
     load_dotenv()
