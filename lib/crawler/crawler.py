@@ -113,7 +113,10 @@ def crawl_eksi(args, number_of_pages_to_crawl=5):
 
         if i == 0:
             # Close the popup:
-            driver.find_element(By.XPATH, '//*[@id="onetrust-close-btn-container"]/button').click()
+            try:
+                driver.find_element(By.XPATH, '//*[@id="onetrust-close-btn-container"]/button').click()
+            except:
+                pass
 
         if i == 1:
             # driver.find_element(By.XPATH, '//*[@id="onetrust-close-btn-container"]/button').click()
