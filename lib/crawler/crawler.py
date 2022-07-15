@@ -82,7 +82,7 @@ def crawl_eksi(args, number_of_pages_to_crawl=5):
 
     else:
         if args.custom_driver:
-            driver = webdriver.Chrome(args.custom_driver, options=options)
+            driver = webdriver.Chrome(executable_path=args.custom_driver, options=options)
         else:
             driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver',  options=options)
 
