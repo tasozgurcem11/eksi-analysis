@@ -1,5 +1,7 @@
 async-generator==1.10
 attrs==21.4.0
+beautifulsoup4==4.11.1
+bs4==0.0.1
 certifi==2022.5.18.1
 cffi==1.15.0
 charset-normalizer==2.0.12
@@ -22,6 +24,7 @@ selenium==4.2.0
 six==1.16.0
 sniffio==1.2.0
 sortedcontainers==2.4.0
+soupsieve==2.3.2.post1
 SQLAlchemy==1.4.37
 trio==0.20.0
 trio-websocket==0.9.2
