@@ -12,7 +12,7 @@
 3. [Run](#run)
 4. [Analysis](#analysis)
 5. [Future Work](#future-work)
-*** 
+
 
 ## Introduction
 
@@ -24,7 +24,7 @@ https://webrazzi.com/2020/05/12/turkiye-nin-en-cok-ziyaret-edilen-20-web-sitesi/
 Goal of this project is to collect and analyze eksi forum public entries. The collected data will be used to analyze the
 most popular topics and to find new topics. Postgresql is used to store the data.
 
-***
+
 ## Setup
 
 2 different crawling is used, in the latest version Python request library is active. To use with Selenium then, 
@@ -42,7 +42,7 @@ Add if you want to use Selenium:
 CUSTOM_CHROME_DRIVER_PATH={CHROMEDRIVER_PATH} 
 DEFAULT_CHROME_DRIVER_PATH=/usr/local/bin/chromedriver 
 ```
-***
+
 ## Run
 
 Build and run container:
@@ -54,7 +54,7 @@ docker build -t eksi .
 ```
 docker run -it --rm eksi
 ```
-***
+
 ## Analysis
 
 So SQL queries are used to analyze the data.
@@ -75,7 +75,7 @@ ORDER BY entry_record DESC -- order by entry_record descending
 LIMIT 5; 
 ```
 
-***
+
 ## Future Work
 
 So in future, Telegram bot and email sender will be used to send daily/weekly/monthly analysis based on:
