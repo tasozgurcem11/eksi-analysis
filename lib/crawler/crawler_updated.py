@@ -38,6 +38,8 @@ def crawl_eksi_updated():
         for soup_item in soup.find_all('a')[1:-1]:
 
             number_of_entries = soup_item.text.split(' ')[-1]
+            if 'b' in number_of_entries:
+                number_of_entries = float(number_of_entries.replace('b', '').replace(',', '.')) * 1000
 
             if number_of_entries.isdigit():
                 entry = soup_item.text.replace(f' {number_of_entries}', '')
